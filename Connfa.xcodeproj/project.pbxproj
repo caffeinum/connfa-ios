@@ -1661,7 +1661,7 @@
 				ORGANIZATIONNAME = "Lemberg Solution";
 				TargetAttributes = {
 					288C5ED71E6D9E4A00F07CB4 = {
-						DevelopmentTeam = J7LBYY3B34;
+						DevelopmentTeam = AE86HBQRXP;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.SafariKeychain = {
@@ -1942,7 +1942,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Connfa!.entitlements";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = J7LBYY3B34;
+				DEVELOPMENT_TEAM = AE86HBQRXP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1958,7 +1958,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Connfa/Vendor/GoogleAnalytics",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.caffeinum.connfa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1976,7 +1976,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Connfa!.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Lemberg Solutions Limited (J7LBYY3B34)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = J7LBYY3B34;
+				DEVELOPMENT_TEAM = AE86HBQRXP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1992,7 +1992,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Connfa/Vendor/GoogleAnalytics",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.caffeinum.connfa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
