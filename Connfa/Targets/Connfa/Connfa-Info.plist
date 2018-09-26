@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>4</string>
+	<string>5</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -56,7 +56,7 @@
 		<true/>
 	</dict>
 	<key>NSCalendarsUsageDescription</key>
-	<string> </string>
+	<string>Notify about upcoming events from conference</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>OpenSans-CondBold.ttf</string>
