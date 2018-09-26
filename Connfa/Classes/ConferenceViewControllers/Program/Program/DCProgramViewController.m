@@ -54,7 +54,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  titleString = @"My Schedule";
+  titleString = @"Моё расписание";
   
   [self arrangeNavigationBar];
   [self setSchedulesTitle];
@@ -393,12 +393,12 @@
   
   UIAlertController* actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
-  UIAlertAction *addScheduleAction = [UIAlertAction actionWithTitle:@"Add a schedule" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+  UIAlertAction *addScheduleAction = [UIAlertAction actionWithTitle:@"Добавить расписание" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     [self addSchedule:nil];
   }];
-  NSString* shareMyScheduleActionTitle = @"Share My Schedule";
+  NSString* shareMyScheduleActionTitle = @"Поделиться расписанием";
   if([NSUserDefaults myScheduleCode]){
-    shareMyScheduleActionTitle = [NSString stringWithFormat:@"Share My Schedule \"%@\"", [NSUserDefaults myScheduleCode]];
+    shareMyScheduleActionTitle = [NSString stringWithFormat:@"Поделиться расписанием \"%@\"", [NSUserDefaults myScheduleCode]];
   }
   UIAlertAction *shareMyScheduleAction = [UIAlertAction actionWithTitle:shareMyScheduleActionTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     [self shareMySchedule];
@@ -408,7 +408,7 @@
     shareMyScheduleAction.enabled = false;
   }
   
-  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel handler:nil];
   [actionSheet addAction:addScheduleAction];
   [actionSheet addAction:shareMyScheduleAction];
   [actionSheet addAction:cancelAction];
@@ -418,13 +418,13 @@
 -(void)showFriendScheduleActions{
   UIAlertController* actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
-  UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+  UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Редактировать" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     [self showEditAlertView];
   }];
-  UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"Remove" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+  UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"Удалить" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
     [self showConfirmationAlertView];
   }];
-  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel handler:nil];
   [actionSheet addAction:editAction];
   [actionSheet addAction:removeAction];
   [actionSheet addAction:cancelAction];
@@ -433,22 +433,22 @@
 
 -(void)addSchedule:(NSString *)code{
   if(![[DCMainProxy sharedProxy] checkReachable]){
-    [DCAlertsManager showAlertControllerWithTitle:@"Internet connection is not available at this moment. Please, try later." message:nil forController:self];
+    [DCAlertsManager showAlertControllerWithTitle:@"Интернет-подключение недоступно. Пожалуйста, попробуйте позже." message:nil forController:self];
     return;
   }
-  UIAlertController *addScheduleAlert = [UIAlertController alertControllerWithTitle:@"Add a schedule"
-                                                                            message:@"You may get this code from a person who has already shared his/her own schedule with you."
+  UIAlertController *addScheduleAlert = [UIAlertController alertControllerWithTitle:@"Добавить расписание"
+                                                                            message:@"Вы можете получить Универсальный Код Расписания у человека, который уже поделился с вами своим расписанием."
                                                                      preferredStyle:UIAlertControllerStyleAlert];
   [addScheduleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-    textField.placeholder = @"Schedule unique code";
+    textField.placeholder = @"Уникальный Код Расписания";
     textField.delegate = self;
     textField.text = code;
   }];
-  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     [self checkInstructionScreen];
   }];
   //TODO: replace initialization
-  addFriendScheduleAction = [UIAlertAction actionWithTitle:@"Add" style:UIAlertActionStyleDefault
+  addFriendScheduleAction = [UIAlertAction actionWithTitle:@"Добавить" style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * _Nonnull action) {
                                                      NSString* myCode = [NSUserDefaults myScheduleCode].stringValue;
                                                      if([myCode isEqualToString:addScheduleAlert.textFields.firstObject.text]){
@@ -459,15 +459,15 @@
                                                        [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
                                                        [SVProgressHUD setDefaultAnimationType:SVProgressHUDAnimationTypeNative];
                                                        [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
-                                                       [SVProgressHUD showWithStatus: @"Loading schedule..."];
+                                                       [SVProgressHUD showWithStatus: @"Загрузка расписания..."];
                                                        [[DCMainProxy sharedProxy] getSchedule:addScheduleAlert.textFields.firstObject.text callback:^(BOOL success, NSDictionary* scheduleDictionary){
                                                          if(success){
                                                            [self dismissProgressHUD];
                                                            [self showAddScheduleNameAlert: scheduleDictionary];
                                                          } else {
                                                            [self dismissProgressHUD];
-                                                           [DCAlertsManager showAlertControllerWithTitle:@"Schedule not found."
-                                                                                                 message:@"Please check your code."
+                                                           [DCAlertsManager showAlertControllerWithTitle:@"Расписание не найдено."
+                                                                                                 message:@"Пожалуйста, проверьте ваш код."
                                                                                            forController:self
                                                             action:^(UIAlertAction *action){
                                                               [self checkInstructionScreen];
@@ -480,7 +480,7 @@
                                                          [self setScheduleName:scheduleToSwitch.name];
                                                          [self setScheduleType:EFriendSchedule andSchedule:scheduleToSwitch];
                                                          [DCAlertsManager showAlertControllerWithTitle:nil
-                                                                                               message:@"This schedule already exist"
+                                                                                               message:@"Такое расписание уже существует"
                                                                                          forController:self];
                                                        });
                                                      }
@@ -496,18 +496,18 @@
 -(void)shareMySchedule{
   DCMainProxy* proxy = [DCMainProxy sharedProxy];
   if(![proxy favoriteEvents]){
-    [DCAlertsManager showAlertControllerWithTitle:@"Currently you have no favourites" message:nil forController:self];
+    [DCAlertsManager showAlertControllerWithTitle:@"Ваше избранное пусто" message:nil forController:self];
     return;
   }
   if(![proxy checkReachable]){
-    [DCAlertsManager showAlertControllerWithTitle:@"Internet connection is not available at this moment. Please, try later." message:nil forController:self];
+    [DCAlertsManager showAlertControllerWithTitle:@"Интернет-подключение недоступно. Пожалуйста, попробуйте позже" message:nil forController:self];
     return;
   }
   
   NSNumber* myCode = [NSUserDefaults myScheduleCode];
-  NSArray *items = @[[NSString stringWithFormat:@"Hi, I have just published/shared my schedule for %@ where I will be an attendee.", EVENT_NAME],
-                     [NSString stringWithFormat: @"Here is the link to add my schedule into the app: %@%@%@", SERVER_URL, @"schedule/share?code=", myCode],
-                     @"If you have any issues with the link, use the Schedule Unique Code in the app to add my schedule manually.",
+  NSArray *items = @[[NSString stringWithFormat:@"Я только что поделился расписанием для %@.", EVENT_NAME],
+                     [NSString stringWithFormat: @"Вот ссылка чтобы добавить моё расписание в приложение: %@%@%@", SERVER_URL, @"schedule/share?code=", myCode],
+                     @"Если возникнут проблемы со ссылкой, используй Уникальный Код Расписания в приложении чтобы добавить моё расписание вручную.",
                      [NSString stringWithFormat:@"Schedule Unique Code: %@", myCode]]; // build an activity view controller
   UIActivityViewController *controller = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
   controller.excludedActivityTypes = @[
@@ -529,15 +529,15 @@
 }
 
 -(void)showAddScheduleNameAlert:(NSDictionary *)scheduleDictionary{
-  UIAlertController *addScheduleAlert = [UIAlertController alertControllerWithTitle:@"Schedule name"
-                                                                            message:@"Enter a name for this schedule."
+  UIAlertController *addScheduleAlert = [UIAlertController alertControllerWithTitle:@"Название расписания"
+                                                                            message:@"Введите название для данного раписания"
                                                                      preferredStyle:UIAlertControllerStyleAlert];
   [addScheduleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-    textField.placeholder = @"Schedule name";
-    textField.text = [NSString stringWithFormat:@"Schedule %@",scheduleDictionary[kDCCodeKey]];
+    textField.placeholder = @"Название расписания";
+    textField.text = [NSString stringWithFormat:@"Расписание %@",scheduleDictionary[kDCCodeKey]];
     textField.delegate = self;
   }];
-  okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+  okAction = [UIAlertAction actionWithTitle:@"ОК" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     UITextField *textField = [[addScheduleAlert textFields] firstObject];
     NSManagedObjectContext *context = [DCMainProxy sharedProxy].workContext;
     [DCSharedSchedule updateFromDictionary:scheduleDictionary inContext:context];
@@ -557,15 +557,15 @@
 }
 
 -(void)showEditAlertView{
-  UIAlertController *addScheduleAlert = [UIAlertController alertControllerWithTitle:@"Schedule name"
+  UIAlertController *addScheduleAlert = [UIAlertController alertControllerWithTitle:@"Название расписания"
                                                                             message:nil
                                                                      preferredStyle:UIAlertControllerStyleAlert];
   [addScheduleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-    textField.placeholder = @"Schedule name";
+    textField.placeholder = @"Нащвание расписания";
     textField.text = selectedSchedule.name;
     textField.delegate = self;
   }];
-  okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+  okAction = [UIAlertAction actionWithTitle:@"ОК" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
       selectedSchedule.name = addScheduleAlert.textFields.firstObject.text;
       [[DCCoreDataStore defaultStore] saveWithCompletionBlock:nil];
       titleString = selectedSchedule.name;
@@ -576,13 +576,13 @@
 }
 
 -(void)showConfirmationAlertView{
-  UIAlertController *confirmationAlertController = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"\"%@\" will be removed from your app", selectedSchedule.name]
+  UIAlertController *confirmationAlertController = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"\"%@\" будет удалено из вашего приложения", selectedSchedule.name]
                                                                             message:nil
                                                                      preferredStyle:UIAlertControllerStyleAlert];
-  UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+  UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"ОК" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     [self removeSchedule];
   }];
-  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil];
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleDefault handler:nil];
   [confirmationAlertController addAction:cancelAction];
   [confirmationAlertController addAction:okAction];
   [self presentViewController:confirmationAlertController animated:true completion:nil];
@@ -592,7 +592,7 @@
 -(void)removeSchedule{
   [[DCMainProxy sharedProxy] removeSchedule:selectedSchedule];
   [self setScheduleType:EMySchedule andSchedule:nil];
-  [self setScheduleName:@"My Schedule"];
+  [self setScheduleName:@"Моё расписание"];
 }
 
 -(void)checkInstructionScreen {

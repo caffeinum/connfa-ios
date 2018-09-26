@@ -184,10 +184,10 @@ static NSInteger hashtagHeightOffset = 4;
       [DCDateHelper convertDate:event.endDate toApplicationFormat:timeFormat];
 
   self.startTimeLabel.text = self.isFirstCellInSection
-                                 ? [NSString stringWithFormat:@"%@", startTime]
+                                 ? [NSString stringWithFormat:@"С %@", startTime]
                                  : nil;
   self.endTimeLabel.text = self.isFirstCellInSection
-                               ? [NSString stringWithFormat:@"to %@", endTime]
+                               ? [NSString stringWithFormat:@"по %@", endTime]
                                : nil;
 
   self.separatorLeadingConstraint.constant =
@@ -202,7 +202,7 @@ static NSInteger hashtagHeightOffset = 4;
   
   if (self.isFavorite) {
     if ([event isKindOfClass:[DCMainEvent class]]) {
-      [self addHashtegWithType:@"Session"];
+      [self addHashtegWithType:@""];
     } else if ([event isKindOfClass:[DCBof class]]) {
       [self addHashtegWithType:@"BoF"];
     } else if ([event isKindOfClass:[DCSocialEvent class]]) {
@@ -277,7 +277,7 @@ static NSInteger hashtagHeightOffset = 4;
   NSString *countHeightText;
   
   if (self.isFavorite) {
-    countHeightText = [NSString stringWithFormat:@"%@ %@", label.text, @"Session"];
+    countHeightText = [NSString stringWithFormat:@"%@ %@", label.text, @""];
   } else {
     countHeightText = label.text;
   }

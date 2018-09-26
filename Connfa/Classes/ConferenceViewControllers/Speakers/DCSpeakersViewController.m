@@ -240,7 +240,7 @@
 
   BOOL itemsEnabled = self.fetchedResultsController.fetchedObjects.count;
 
-  self.noDataLabel.text = self.searchBar.text.length ? @"No Search Result" : @"Currently there are no speakers";
+  self.noDataLabel.text = self.searchBar.text.length ? @"No Search Result" : @"Пока ещё нет ни одного лектора";
   self.noDataImage_heightConstraint.constant = self.searchBar.text.length ? 0 : 100;
   
   [self.noDataImageView layoutIfNeeded];

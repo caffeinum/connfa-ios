@@ -116,12 +116,12 @@ DCDayEventSourceDelegate> {
   switch (self.eventsStrategy.strategy) {
     case EDCEventStrategyPrograms: {
       self.stubImage = [UIImage imageNamed:@"ic_no_sessions"];
-      self.stubMessage = isFilterEnabled ? @"No Matching Events" : @"Currently there are no sessions";
+      self.stubMessage = isFilterEnabled ? @"No Matching Events" : @"Пока ещё нет ни одного события";
     }
       break;
     case EDCEeventStrategyFavorites: {
       self.stubImage = [UIImage imageNamed:@"ic_no_my_schedule"];
-      self.stubMessage = @"Your schedule is empty.\nPlease add some events";
+      self.stubMessage = @"Ваше расписание пусто.\nПожалуйста, добавьте события";
     }
       break;
     case EDCEventStrategyBofs: {
@@ -136,7 +136,7 @@ DCDayEventSourceDelegate> {
       break;
     case EDCEventStrategySharedSchedule: {
       self.stubImage = [UIImage imageNamed:@"ic_no_my_schedule"];
-      self.stubMessage = @"Currently shared schedule is empty";
+      self.stubMessage = @"Ваше расписание пусто";
     }
       break;
   }
@@ -236,7 +236,7 @@ DCDayEventSourceDelegate> {
   }
   if(![[DCMainProxy sharedProxy] checkReachable]){
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-      [DCAlertsManager showAlertControllerWithTitle:nil message:@"Internet connection is not available at this moment. Please, try later" forController:self];
+      [DCAlertsManager showAlertControllerWithTitle:nil message:@"Отсуствует Интернет-подключение. Пожалуйста, попробуйте позже." forController:self];
     });
   }
 }

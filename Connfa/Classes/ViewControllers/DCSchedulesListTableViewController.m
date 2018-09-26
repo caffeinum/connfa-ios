@@ -101,7 +101,7 @@
   cell.tintColor = [DCAppConfiguration favoriteEventColor];
   
     if (indexPath.row == 0) {
-        cell.textLabel.text = @"My Schedule";
+        cell.textLabel.text = @"Моё расписание";
     }else {
         DCSharedSchedule* sharedSchedule = [schedules objectAtIndex:indexPath.row - 1];
         cell.textLabel.text = sharedSchedule.name;
